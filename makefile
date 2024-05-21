@@ -1,29 +1,11 @@
-# Compilador C++
-CXX = g++
+all:
+	g++ -Wall -c funciones_e_d_f.cpp -lwiringPi
+	g++ -Wall -c funciones_emisor.cpp -lwiringPi
+	g++ -Wall -c emisor.cpp -lwiringPi
+	g++ -Wall -o emisor funciones_e_d_f.o funciones_emisor.o emisor.o -lwiringPi
 
-# Flags del compilador
-CXXFLAGS = -Wall -g -std=c++11 -lwiringPi
-
-# Archivos objeto
-OBJS = emisor.o receptor.o clock.o
-
-# Nombre del ejecutable
-APPNAME  = programa
-
-# Regla para construir el ejecutable
-$(TARGET): $(OBJS)
-	$(CXX) $(CXXFLAGS) -o $(APPNAME ) $(OBJS)
-
-# Reglas para compilar los archivos objeto
-emisor.o: emisor.cpp emisor.h
-	$(CXX) $(CXXFLAGS) -c emisor.cpp
-
-receptor.o: receptor.cpp receptor.h
-	$(CXX) $(CXXFLAGS) -c receptor.cpp
-
-clock.o: clock.cpp
-	$(CXX) $(CXXFLAGS) -c clock.cpp
-
-# Regla para limpiar los archivos objeto y el ejecutable
 clean:
-	rm -f $(OBJS) $(APPNAME )
+	rm *.o emisor
+
+list:
+	ls
